@@ -8,6 +8,8 @@
 ## IconTexture: Interface\Icons\Spell_Ice_Lament
 ## X-Category: Combat
 ## X-Website: https://github.com/masterred92/BarrierReef
+## X-Curse-Project-ID: 1819368
+## X-Wago-ID: 5NRg3E63
 
 Libs\KennyShared\Compat.lua
 Libs\KennyShared\Core.lua
