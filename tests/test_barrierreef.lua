@@ -43,6 +43,8 @@ check(BR.modes.shield == "aura" and BR.state == "reef" and row.headText == "REEF
 S.drop(IB)
 check(BR.state == "refresh" and row.headText == "BUFF +15%", "shield gone: BUFF +15%")
 check(row.lineText[2] == "REFRESH when Ice Barrier is ready", "REFRESH waits for the 30 s cooldown")
+W.advance(1.1)
+check(row.h == 78 and row.lines[2].shown and 44 + 14 * 2 + 6 <= row.h, "r4: REFRESH line 2 fits inside the box")
 W.advance(31)
 check(row.lineText[2] == "REFRESH", "REFRESH once off cooldown")
 -- Cold Snap clears the cooldown.
