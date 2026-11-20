@@ -41,7 +41,7 @@ Barrier Reef is 4th in priority, after Hold the Weather, Eight Second Argument a
 
 ## Checks
 
-`tests/run.sh <wow-ui-source>`, `tools/verify_unit_events.py <wow-ui-source>`, `tools/check_suite_lib.sh`, `tools/verify_media.sh`.
+`tests/run.sh <wow-ui-source>`, `tools/verify_unit_events.py <wow-ui-source>`, `tools/check_suite_lib.sh <frost-suite-lib folder>`, `tools/verify_media.sh`.
 Spell IDs, durations and cooldowns come from the game's own data tables (SpellName, SkillLineAbility, SpellMisc, SpellDuration,
 SpellCooldowns) for build 1.60.1.70862.
 
