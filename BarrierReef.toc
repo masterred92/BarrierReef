@@ -2,7 +2,7 @@
 ## Title: Barrier Reef
 ## Notes: Frost Mage damage window: shows whether Ice Barrier's +15% Frost damage minute and its extra +5% while shielded are up (REEF +20% / BUFF +15% / SHIELD DOWN). Part of the Frost Suite; works alone. Blizzard sounds and textures only.
 ## Author: Kenny
-## Version: 1.0.0
+## Version: 1.0.1
 ## SavedVariables: KennyBarrierReefDB
 ## X-License: MIT
 ## IconTexture: Interface\Icons\Spell_Ice_Lament
