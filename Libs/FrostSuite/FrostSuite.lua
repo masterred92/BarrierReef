@@ -6,7 +6,7 @@
 -- upgrade keeps it. Each addon works alone: with one addon loaded the dock is a single row.
 -- Look and numbers come from UI Bot's VISUAL_SPEC.md (v1): FS.C, FS.FONT, FS.PALETTE and FS.ADDONS are the drop-in tables.
 local _, ns = ...
-local MAJOR, MINOR = "FrostSuite-1.0", 1
+local MAJOR, MINOR = "FrostSuite-1.0", 2
 local FS = _G.FrostSuite_1_0
 if type(FS) ~= "table" then FS = {}; _G.FrostSuite_1_0 = FS end
 ns.FrostSuite = FS
@@ -249,6 +249,7 @@ function FS.Bar(key, frac, color)
   local r = FS.rows[key]
   r.barValue = frac
   if not frac then r.bar:Hide(); return end
+  if r.full == false then return end
   local c = pcolor(color or FS.ADDONS[key].accent or "Snow")
   r.bar:SetStatusBarColor(c[1], c[2], c[3])
   r.bar:SetValue(math.max(0, math.min(1, frac)))
@@ -346,6 +347,12 @@ function FS.Layout()
     if FS.Visible(r) then
       r.h = FS.RowHeight(r)
       r:SetHeight(r.h)
+      -- a title strip shows only icon, title and status; headline, bar and lines need the taller row
+      local full = r.h > FS.C.STRIP_H
+      r.full = full
+      r.head:SetShown(full)
+      if not full then r.bar:Hide() elseif r.barValue then r.bar:Show() end
+      for _, l in ipairs(r.lines) do l:SetShown(full) end
       r:ClearAllPoints()
       if prev then r:SetPoint("TOPLEFT", prev, "BOTTOMLEFT", 0, -FS.C.GAP) else r:SetPoint("TOPLEFT", FS.Anchor(), "TOPLEFT", 0, 0) end
       r.after = prev and prev.key or "anchor"

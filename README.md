@@ -1,6 +1,6 @@
 # Barrier Reef
 
-A tiny Frost Mage box for **WoW: Forever** (Interface 16001). Part of Kenny's Frost Suite, and it works alone.
+A tiny Frost Mage box for **WoW: Forever** (Interface 16001). Version 1.0.0. Part of Kenny's Frost Suite, and it works alone.
 
 Official Nov 2, 2026 notes made Ice Barrier a damage cooldown. Casting it gives **+15% Frost damage for 1 minute**, plus
 **another 5% while the shield holds**. Barrier Reef shows which of those is up, in one of three states:
