@@ -31,6 +31,8 @@ BR.BUFF = 1326891      -- Frigid Power: +15% Frost damage for 1 min
 BR.COLD_SNAP = 12472
 BR.BUFF_SECONDS = 60
 BR.COOLDOWN = 30
+-- Ice Barrier is a talent: Talent TierID 6 = level 40 (10 + 5 x 6), SpellLevels.BaseLevel 40 (spell 11426), build 1.60.1.71037.
+BR.NEEDS = { { name = L["Ice Barrier"], level = 40, spells = BR.BARRIER, talent = true } }
 BR.DEFAULTS = {}
 
 local db, row
@@ -134,7 +136,10 @@ end
 
 function BR.Paint()
   local s = BR.state
-  if s == "hidden" then FS.State(KEY, "hidden"); return end
+  if s == "hidden" then
+    if BR.need then FS.NotYet(KEY, BR.need) else FS.State(KEY, "hidden") end
+    return
+  end
   FS.ClearLines(KEY)
   local left = BR.buffUntil and math.max(0, BR.buffUntil - now()) or nil
   if s == "reef" or s == "buff" or s == "refresh" then
@@ -236,7 +241,11 @@ ev:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "player")
 ev:RegisterUnitEvent("UNIT_AURA", "player")
 
 local function refresh()
-  if not C.InCombat() then BR.known = FS.IsMage() and FS.KnowsAny(BR.BARRIER) ~= false end
+  if not C.InCombat() then
+    BR.need = FS.IsMage() and FS.Missing(BR.NEEDS) or nil
+    BR.known = FS.IsMage() and BR.need == nil
+    if BR.known then FS.Learned(KEY) end
+  end
   BR.Update()
 end
 local handlers = {
@@ -250,7 +259,8 @@ ev:SetScript("OnEvent", function(_, event, ...)
     if ... ~= ADDON then return end
     db = Core.Migrate(KennyBarrierReefDB, migrations, SCHEMA)
     KennyBarrierReefDB = db
-    row = FS.Register(KEY, db, { title = L["Barrier Reef"], slash = BR.Slash, help = "test | sound on|off | debug", debug = Core.PrintDebug })
+    row = FS.Register(KEY, db, { title = L["Barrier Reef"], slash = BR.Slash, help = "test | sound on|off | debug", debug = Core.PrintDebug,
+      refresh = refresh })
     Core.SafeCall("refresh", refresh)
     return
   end

@@ -73,9 +73,9 @@ check(BR.modes.buff == "none" and BR.castAt == nil, "hidden cast: no timer")
 check(row.statusText == "can't see your casts here" and row.headText ~= "SHIELD DOWN", "box says it can't see casts")
 check(W.printed("can't start its timer"), "chat says so once")
 
--- 5. Not a Mage / no Ice Barrier: no slot. Other units ignored.
+-- 5. No Ice Barrier: one calm line (tests/test_lowlevel.lua). Other units ignored.
 reset(); W.known = {}; W.fire("SPELLS_CHANGED")
-check(row.state == "hidden", "Ice Barrier not known: hidden")
+check(row.state == "learn" and row.learnText.text_ == "Take the Ice Barrier talent", "Ice Barrier not known: says to take the talent (r5)")
 W.known = nil; W.fire("SPELLS_CHANGED")
 S.cast(IB, "party1")
 check(BR.castAt == nil, "other units' Ice Barrier ignored")

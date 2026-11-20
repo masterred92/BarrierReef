@@ -25,6 +25,12 @@ It doesn't draw an absorb bar (Dyre's Shields Up already does that). It never ca
 In combat the game usually hides buffs from addons, so expect `shield state unknown` there unless the game marks the shield
 as never secret. `/frost reef debug` shows exactly what's readable on your client.
 
+## Low-level Mages
+
+Until you have the Ice Barrier talent (from level 40), the box shows one calm line, like `Take Ice Barrier at level 40`, and a small
+**Hide until I learn** button. In combat the line steps aside. The button hides the box on that character only, and the box comes back by
+itself when you learn what it needs. Other classes never see it.
+
 ## Commands
 
 The Frost Suite has no per-addon slash commands, only `/frost <sub>`. That keeps the risk of clashing with other addons low.
