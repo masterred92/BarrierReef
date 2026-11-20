@@ -42,7 +42,6 @@ BR.hiddenEvents, BR.plainCasts = 0, 0
 BR.known = true
 BR.modes = { buff = "cast", shield = "unknown" }
 BR.state = "idle"
-BR.shieldSeen = false  -- the shield aura was seen up during the current minute (aura mode)
 local gen = 0
 
 local function now() return C.Clock() end
